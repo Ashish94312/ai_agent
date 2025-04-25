@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: web-research-agent
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    plan: free
