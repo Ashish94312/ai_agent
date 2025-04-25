@@ -1,0 +1,8 @@
+openapi
+google-search-results
+beautifulsoup4
+requests
+newspaper3k
+fpdf
+lxml[html_clean]
+textblob
