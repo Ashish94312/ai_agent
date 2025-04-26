@@ -17,8 +17,9 @@
         <p>{{ report }}</p>
     {% endif %}
 
-    {% if generated %}
-        <p><a href="/download" target="_blank">Download Report PDF</a></p>
+    {% if download_url %}
+        <h2>Download your Report:</h2>
+        <a href="{{ download_url }}" download="research_report.pdf">📄 Click here to download your PDF</a>
     {% endif %}
 </body>
 </html>
