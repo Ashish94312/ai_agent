@@ -44,16 +44,20 @@ import pdfkit
 import io
 
 def export_to_pdf2(user_query, report_text):
-    # Convert text to basic HTML
+    # Preprocess: Replace newlines before injecting into HTML
+    processed_text = report_text.replace('\n', '<br>')
+
     html_content = f"""
     <html>
         <head><title>{user_query}</title></head>
-        <body><h1>{user_query}</h1><p>{report_text.replace('\n', '<br>')}</p></body>
+        <body>
+            <h1>{user_query}</h1>
+            <p>{processed_text}</p>
+        </body>
     </html>
     """
 
     # Generate PDF directly into memory
-    pdf_buffer = pdfkit.from_string(html_content, False)  # False = return bytes, not save file
+    pdf_buffer = pdfkit.from_string(html_content, False)
 
     return io.BytesIO(pdf_buffer)
-
