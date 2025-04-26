@@ -40,7 +40,8 @@ def export_to_pdf(query: str, report_text: str, filename="output.pdf"):
     return output_path
 
 
-
+import pdfkit
+import io
 
 def export_to_pdf2(user_query, report_text):
     # Convert text to basic HTML

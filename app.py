@@ -39,8 +39,8 @@ def index():
         if results or news_blocks:
             all_blocks = results + news_blocks
             report = synthesize_report(user_query, all_blocks)
-            # os.makedirs("output", exist_ok=True)
-            # export_to_pdf(user_query, report)
+            os.makedirs("output", exist_ok=True)
+            export_to_pdf(user_query, report)
             # pdf_file = export_to_pdf2(user_query, report)
             # report = pdf_file.getvalue()
             app.report_pdf = export_to_pdf2(user_query, report)
