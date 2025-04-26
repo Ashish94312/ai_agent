@@ -44,13 +44,18 @@ def index():
     return render_template("index.html", query=user_query, report=report)
 
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
 @app.route('/download')
 def download_pdf():
     file_path = "output/report.pdf"
-    try:
-        return send_file(file_path, as_attachment=True)
-    except Exception as e:
-        return str(e), 500
+    if not os.path.exists(file_path):
+        app.logger.error("PDF not found!")
+        return "No report generated yet. Please submit a query first.", 404
+    app.logger.info(f"Serving file: {file_path}")
+    return send_file(file_path, as_attachment=True)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
