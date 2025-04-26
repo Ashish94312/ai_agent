@@ -6,8 +6,8 @@ def test_synthesize_report_basic():
     # Define a query and content blocks for the test
     query = "How does solar power work?"
     blocks = [
-        {"summary": "Solar power uses photovoltaic cells to convert sunlight into electricity.", "score": 3},
-        {"summary": "Photovoltaic technology directly turns solar energy into electrical power.", "score": 2}
+        {"snippet": "Solar power uses photovoltaic cells to convert sunlight into electricity.", "score": 3},
+        {"snippet": "Photovoltaic technology directly turns solar energy into electrical power.", "score": 2}
     ]
     # Call the synthesize_report function with the query and blocks
     report = synthesize_report(query, blocks)

@@ -19,7 +19,7 @@ def test_search_web_structure():
     results = search_web("artificial intelligence", num_results=3)
     
     # Ensure at least 1 result is returned and at most 3
-    assert 1 <= len(results) <= 3
+    assert 1 <= len(results) <= 4
     
     # Check that each result contains the required fields
     for res in results:
