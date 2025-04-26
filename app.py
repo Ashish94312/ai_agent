@@ -8,11 +8,12 @@ from agent.synthesizer import synthesize_report
 from agent.exporter import export_to_pdf
 from agent.news_aggregator import get_latest_news
 from dotenv import load_dotenv
+from agent.exporter import export_to_pdf2
 import os
 
 load_dotenv()
 app = Flask(__name__)
-
+app.report_pdf = None
 @app.route('/', methods=['GET', 'POST'])
 def index():
     report = ""
@@ -38,8 +39,11 @@ def index():
         if results or news_blocks:
             all_blocks = results + news_blocks
             report = synthesize_report(user_query, all_blocks)
-            os.makedirs("output", exist_ok=True)
-            export_to_pdf(user_query, report)
+            # os.makedirs("output", exist_ok=True)
+            # export_to_pdf(user_query, report)
+            # pdf_file = export_to_pdf2(user_query, report)
+            # report = pdf_file.getvalue()
+            app.report_pdf = export_to_pdf2(user_query, report)
 
     return render_template("index.html", query=user_query, report=report)
 
@@ -55,7 +59,7 @@ def download_pdf():
         app.logger.error("PDF not found!")
         return "No report generated yet. Please submit a query first.", 404
     app.logger.info(f"Serving file: {file_path}")
-    return send_file(file_path, as_attachment=True)
+    return send_file(app.report_pdf, as_attachment=True,  mimetype='application/pdf', download_name='report.pdf')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

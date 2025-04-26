@@ -38,3 +38,21 @@ def export_to_pdf(query: str, report_text: str, filename="output.pdf"):
     # Output the PDF to the specified path
     pdf.output(output_path)
     return output_path
+
+
+
+
+def export_to_pdf2(user_query, report_text):
+    # Convert text to basic HTML
+    html_content = f"""
+    <html>
+        <head><title>{user_query}</title></head>
+        <body><h1>{user_query}</h1><p>{report_text.replace('\n', '<br>')}</p></body>
+    </html>
+    """
+
+    # Generate PDF directly into memory
+    pdf_buffer = pdfkit.from_string(html_content, False)  # False = return bytes, not save file
+
+    return io.BytesIO(pdf_buffer)
+
