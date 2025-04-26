@@ -19,7 +19,8 @@ app.report_pdf = None
 def index():
     report = ""
     user_query = ""
-    pdf_ready = False
+    # pdf_ready = False
+    download_url = ""
     if request.method == 'POST':
         user_query = request.form.get('query')
         query_analysis = analyze_query(user_query)
