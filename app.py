@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 from agent.exporter import export_to_pdf2
 import os
 import base64
+import io
+from concurrent.futures import ThreadPoolExecutor
 
 load_dotenv()
 app = Flask(__name__)
@@ -34,9 +36,25 @@ def index():
                 for article in news_results if "summary" in article
             ]
 
+        # if "key_topics" in query_analysis:
+        #     search_query = " ".join(query_analysis["key_topics"])
+        #     results = search_web(search_query)
         if "key_topics" in query_analysis:
             search_query = " ".join(query_analysis["key_topics"])
-            results = search_web(search_query)
+            results = search_web(search_query)[:3]  # LIMIT to top 3 results
+
+            # 3. Scrape and Analyze in Parallel
+            def fetch_and_analyze(result, key_topics):
+                content = extract_main_content(result['link'])
+                return analyze_content(content, key_topics)
+
+            with ThreadPoolExecutor(max_workers=5) as executor:
+                futures = [executor.submit(fetch_and_analyze, r, query_analysis["key_topics"]) for r in results]
+                for future in futures:
+                    content_analysis = future.result()
+                    if content_analysis["score"] > 0:
+                        results.append(content_analysis)
+
 
         if results or news_blocks:
             all_blocks = results + news_blocks
