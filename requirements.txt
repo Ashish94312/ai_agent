@@ -10,3 +10,4 @@ serpapi
 lxml[html_clean]
 pdfkit
 google-search-results
+fpdf
