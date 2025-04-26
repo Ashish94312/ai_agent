@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file
 from agent.query_analyzer import analyze_query
 from agent.search_tool import search_web
 from agent.scraper import extract_main_content
@@ -42,6 +42,15 @@ def index():
             export_to_pdf(user_query, report)
 
     return render_template("index.html", query=user_query, report=report)
+
+
+@app.route('/download')
+def download_pdf():
+    file_path = "output/report.pdf"
+    try:
+        return send_file(file_path, as_attachment=True)
+    except Exception as e:
+        return str(e), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

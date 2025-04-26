@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Web Research Agent</title>
 </head>
 <body>
-    <h1>🧠 Web Research Agent</h1>
+    <h1>Web Research Agent</h1>
+
     <form method="post">
-        <input type="text" name="query" placeholder="Enter your query" required>
-        <input type="submit" value="Generate Report">
+        <input type="text" name="query" placeholder="Enter your query" size="60" value="{{ query }}">
+        <button type="submit">Submit</button>
     </form>
 
     {% if report %}
-        <h2>📝 Generated Report:</h2>
-        <pre>{{ report }}</pre>
-        <p><a href="/output/report.pdf" target="_blank">📄 Download PDF</a></p>
+        <h2>Generated Research Report:</h2>
+        <p>{{ report }}</p>
+    {% endif %}
+
+    {% if generated %}
+        <p><a href="/download" target="_blank">Download Report PDF</a></p>
     {% endif %}
 </body>
 </html>
