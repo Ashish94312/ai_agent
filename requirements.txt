@@ -9,3 +9,4 @@ nltk
 serpapi
 lxml
 pdfkit
+google-search-results
