@@ -25,8 +25,8 @@ git
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/web-research-agent.git
-   cd web-research-agent
+   git clone https://github.com/Ashish94312/ai_agent.git
+   cd ai_agent
    ```
 
 2. Install dependencies:
@@ -34,13 +34,7 @@ git
    pip install -r requirements.txt
    ```
 
-3. Download the NLTK `wordnet` resource:
-   ```python
-   import nltk
-   nltk.download('wordnet')
-   ```
-
-4. Set up environment variables in a `.env` file:
+3. Set up environment variables in a `.env` file:
    ```
    OPENAI_API_KEY=your_openai_api_key
    SERPAPI_API_KEY=your_serpapi_api_key
